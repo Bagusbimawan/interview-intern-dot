@@ -16,3 +16,7 @@ func GetProjectByID(id int) ([]model.Project, error) {
 func GetProjectDetailByID(id int) (*model.Project, error) {
 	return repository.GetProjectDetailByID(id)
 }
+
+func UpdateProjectByID(id int, updatedProject *model.Project) error {
+	return repository.UpdateByID(id, updatedProject)
+}

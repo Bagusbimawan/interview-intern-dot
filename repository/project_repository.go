@@ -26,3 +26,21 @@ func GetProjectDetailByID(id int) (*model.Project, error) {
 	}
 	return &project, nil
 }
+
+func UpdateProject(project *model.Project) error {
+	return config.DB.Save(project).Error
+}
+
+func UpdateByID(id int, updatedProject *model.Project) error {
+	var project model.Project
+	// Temukan proyek berdasarkan ID
+	if err := config.DB.First(&project, id).Error; err != nil {
+		return err
+	}
+	// Update field yang diizinkan
+	project.Title = updatedProject.Title
+	project.Description = updatedProject.Description
+	// Tambahkan field lain jika perlu
+
+	return config.DB.Save(&project).Error
+}

@@ -48,3 +48,26 @@ func GetProjectByID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": project})
 }
+
+func UpdateProjectByID(c *gin.Context) {
+	idParam := c.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID tidak valid"})
+		return
+	}
+
+	var updatedProject model.Project
+	if err := c.ShouldBindJSON(&updatedProject); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
+		return
+	}
+
+	err = service.UpdateProjectByID(id, &updatedProject)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal memperbarui project"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Project berhasil diperbarui", "data": updatedProject})
+}
