@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"intervew-intern-dot/model"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -29,4 +30,5 @@ func Initdb() {
 	if err != nil {
 		panic("Error connecting to database: " + err.Error())
 	}
+	DB.AutoMigrate(&model.User{}, &model.Task{}, &model.Project{})
 }

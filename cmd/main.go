@@ -2,6 +2,7 @@ package main
 
 import (
 	"intervew-intern-dot/config"
+	"intervew-intern-dot/routes"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -14,6 +15,6 @@ func main() {
 	}
 	config.Initdb()
 	r := gin.Default()
-
+	routes.SetupRoutes(r)
 	r.Run(":8080")
 }
