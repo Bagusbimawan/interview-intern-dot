@@ -16,4 +16,6 @@ func SetupRoutes(r *gin.Engine) {
 
 	auth.Use(middleware.JWTAuthMiddleware())
 	auth.POST("/project", controller.CreateProject)
+	auth.GET("/users/:id/project", controller.GetProjectByID)
+	auth.POST("/project/:id/task", controller.CreateTaskUnderProject)
 }

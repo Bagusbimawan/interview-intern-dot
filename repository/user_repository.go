@@ -11,13 +11,10 @@ func CreateUser(user *model.User) error {
 
 func GetUserByEmail(email string) (*model.User, error) {
 	var user model.User
-
-	err := config.DB.Where("email = ?", email).First(&user).Error
-
+	err := config.DB.Preload("Projects").Where("email = ?", email).First(&user).Error
 	if err != nil {
 		return nil, err
 	}
-
 	return &user, nil
 }
 
