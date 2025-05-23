@@ -17,3 +17,22 @@ func GetTasksByProjectID(projectID int) ([]model.Task, error) {
 	}
 	return tasks, nil
 }
+
+func UpdateTaskByID(id int, updatedTask *model.Task) error {
+	var task model.Task
+	if err := config.DB.First(&task, id).Error; err != nil {
+		return err
+	}
+	task.Title = updatedTask.Title
+	task.Description = updatedTask.Description
+	task.IsDone = updatedTask.IsDone
+	return config.DB.Save(&task).Error
+}
+
+func DeleteTaskByID(id int) error {
+	var task model.Task
+	if err := config.DB.First(&task, id).Error; err != nil {
+		return err
+	}
+	return config.DB.Delete(&task).Error
+}

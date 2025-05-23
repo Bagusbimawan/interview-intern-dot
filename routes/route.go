@@ -19,4 +19,6 @@ func SetupRoutes(r *gin.Engine) {
 	auth.GET("/project/:id", controller.GetProjectByID)
 	auth.POST("/project/:id/task", controller.CreateTaskUnderProject)
 	auth.PUT("/project/:id", controller.UpdateProjectByID)
+	auth.PUT("/task/:id", controller.UpdateTaskByID)
+	auth.DELETE("/task/:id", controller.DeleteTaskByID)
 }

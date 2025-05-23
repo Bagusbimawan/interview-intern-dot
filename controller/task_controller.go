@@ -40,3 +40,41 @@ func CreateTaskUnderProject(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "task created successfully", "data": task})
 }
+
+func UpdateTaskByID(c *gin.Context) {
+	taskIDParam := c.Param("id")
+	taskID, err := strconv.Atoi(taskIDParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid task id"})
+		return
+	}
+
+	var updatedTask model.Task
+	if err := c.ShouldBindJSON(&updatedTask); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
+	}
+
+	if err := service.UpdateTaskByID(taskID, &updatedTask); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed to update task"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "task updated successfully", "data": updatedTask})
+}
+
+func DeleteTaskByID(c *gin.Context) {
+	taskIDParam := c.Param("id")
+	taskID, err := strconv.Atoi(taskIDParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid task id"})
+		return
+	}
+
+	if err := service.DeleteTaskByID(taskID); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed to delete task"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "task deleted successfully"})
+}

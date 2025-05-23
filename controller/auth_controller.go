@@ -10,7 +10,7 @@ import (
 
 func Register(c *gin.Context) {
 	var user model.User
-	if err := c.ShouldBindBodyWithJSON(&user); err != nil {
+	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
@@ -29,7 +29,7 @@ func Register(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	var input model.User
-	if err := c.ShouldBindBodyWithJSON(&input); err != nil {
+	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
