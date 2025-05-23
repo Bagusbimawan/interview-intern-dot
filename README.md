@@ -1,5 +1,16 @@
 # Interview Intern Dot Backend
 
+**Aplikasi ini adalah backend REST API untuk manajemen user, project, dan task, yang dapat digunakan untuk kebutuhan interview, magang, atau pembelajaran pengembangan aplikasi backend modern.**
+
+- Pengembang: **Bagus Bimawan Sembodo**
+
+Aplikasi ini menyediakan fitur:
+- Registrasi dan login user dengan autentikasi JWT
+- Manajemen project (CRUD) yang terhubung ke user
+- Manajemen task yang terhubung ke project
+- Setiap endpoint yang sensitif dilindungi oleh JWT middleware
+- Struktur kode rapi dan scalable dengan Layered Architecture Pattern
+
 ## Project Structure & Pattern
 
 Project ini menggunakan **Layered Architecture Pattern** (juga dikenal sebagai Clean Architecture/Onion Architecture secara sederhana) yang terdiri dari beberapa layer utama:
